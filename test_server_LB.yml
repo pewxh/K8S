@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balanced
+spec:
+  selector:
+    app: myapp
+  type: NodePort
+  ports:
+    - port: 325 #internal to k8s cluster
+      targetPort: 80 #port on which service is running inside container
+      protocol: TCP
+      nodePort: 32222 #port exposed on host machine , use `hostip:nodePort` for connection outside cluster
