@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp-load-balanced
+spec:
+  selector:
+    app: wordpress
+  type: NodePort
+  ports:
+    - port: 325
+      targetPort: 80
+      protocol: TCP
+      nodePort: 32222

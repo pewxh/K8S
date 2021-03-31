@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: wordpress-rc
+spec:
+  replicas: 1
+  selector:
+    app: wordpress
+  template:
+    metadata:
+      name: wordpress
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: 'MYSQL_ROOT_PASSWORD'
+              value: 'password'
+            - name: 'MYSQL_DATABASE'
+              value: 'wordpressDB'
+            - name: 'MYSQL_USER'
+              value: 'pewxh'
+            - name: 'MYSQL_PASSWORD'
+              value: 'password'
+        - name: wordpress
+          image: wordpress:5.1.1-php7.3-apache
